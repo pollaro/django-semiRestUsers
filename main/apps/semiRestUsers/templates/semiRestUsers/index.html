@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Restful Users</title>
-        {% link static %}
-        <link rel="stylesheet" href="{% static semiRestUsers/css/indexStyle.css %}">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'semiRestUsers/css/indexStyle.css' %}">
     </head>
     <body>
         <h2>Users</h2>
@@ -19,12 +19,14 @@
             {% for user in allUsers %}
             <tr>
                 <td>{{user.id}}</td>
-                <td>{{user.name}}</td>
+                <td>{{user.firstName}} {{user.lastName}}</td>
+                <td>{{user.email}}</td>
                 <td>{{user.created_at}}</td>
-                <td><a href="https://localhost:8000/users/"{{users.id}}"/show">Show</a> <a href="https://localhost:8000/users/"{{users.id}}"/edit">Edit</a> <a href="https://localhost:8000/users/"{{users.id}}"/destroy">Destroy</a></td>
+                <td><a href='{% url "show" id=user.id %}'>Show</a> <a href='{% url "edit" id=user.id %}'>Edit</a> <a href='{% url "destroy" id=user.id %}'>Destroy</a></td>
             </tr>
             {% endfor %}
-            <a href="https://localhost:8000/users/create">Add a New User</a>
         </table>
+        <br>
+        <a href="http://localhost:8000/users/new">Add a New User</a>
     </body>
 </html>

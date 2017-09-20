@@ -4,20 +4,28 @@
         <meta charset="utf-8">
         <title>New User</title>
         {% load static %}
-        <link rel="stylesheet" href="{% static semiRestUsers/css/newStyle.css %}">
+        <link rel="stylesheet" href="{% static 'semiRestUsers/css/newStyle.css' %}">
     </head>
     <body>
         <h2>Add a New User</h2>
 
         <form action="/users/create" method="post">
+            {% csrf_token %}
             First Name:
+            <br>
             <input type="text" name="firstName">
+            <br>
             Last Name:
+            <br>
             <input type="text" name="lastName">
+            <br>
             Email:
+            <br>
             <input type="text" name="emailAddress">
+            <br>
             <input type="submit" name="submitBut" value="Create">
         </form>
-        <a href="https://localhost:8000/users">Go Back</a>
+        <br>
+        <a href="http://localhost:8000/users">Go Back</a>
     </body>
 </html>
