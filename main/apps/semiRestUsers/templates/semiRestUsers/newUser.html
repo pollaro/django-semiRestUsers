@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>New User</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static semiRestUsers/css/newStyle.css %}">
+    </head>
+    <body>
+        <h2>Add a New User</h2>
+
+        <form action="/users/create" method="post">
+            First Name:
+            <input type="text" name="firstName">
+            Last Name:
+            <input type="text" name="lastName">
+            Email:
+            <input type="text" name="emailAddress">
+            <input type="submit" name="submitBut" value="Create">
+        </form>
+        <a href="https://localhost:8000/users">Go Back</a>
+    </body>
+</html>

@@ -1,22 +1,41 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 
 def index(request):
-    return render(request,'semiRestUsers/index.html')
+    context = {
+        'allUsers':Users.objects.all()
+    }
+    return render(request,'semiRestUsers/index.html',context)
 
 def new(request):
     return render(request,'semiRestUsers/new.html')
 
 def edit(request,id):
-    return render(request,'semiRestUsers/edit.html')
+    editUser = {
+        'user':Users.objects.get(id=id)
+    }
+    return render(request,'semiRestUsers/edit.html',editUser)
 
 def create(request):
-    return redirect()
+    Users.objects.create(firstName=request.POST['firstName'],lastName=request.POST['lastName'],email=request.POST['emailAddress'])
+    user_id = Users.objects.get(email=email)
+    return redirect(reverse('show',args=[user_id]))
 
 def show(request,id):
-    return render(request,'semiRestUsers/show.html')
+    details ={
+        'user':Users.objects.get(id=id)
+    }
+    return render(request,'semiRestUsers/show.html',details)
 
 def destroy(request,id):
-    return redirect()
+    u = Users.objects.get(id=id)
+    u.delete()
+    return redirect(index)
 
 def update(request,id):
-    return redirect()
+    u = Users.objects.get(id=request.POST['userID'])
+    u.firstName = request.POST['firstName']
+    u.lastName = request.POST['lastName']
+    u.email = request.POST['emailAddress']
+    u.save()
+    return redirect(reverse('show',args=[user_id]))
